@@ -75,11 +75,11 @@ app.put('/api/persons/:id', (req, res, next) => {
   Person.findOne({ name })
     .then(person => {
       console.log('loytyi', person)
-      person.updateOne({ number })
+      person.updateOne({ number }, { runValidators: true })
       .then(result => {
         res.sendStatus(204).end();
-      });
-      
+      })
+      .catch(error => next(error));
     })
     .catch(error => next(error));
 })
